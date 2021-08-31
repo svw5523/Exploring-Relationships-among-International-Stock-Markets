@@ -1,37 +1,29 @@
-## Welcome to GitHub Pages
+# Exploring Relationships among International Stock Markets
 
-You can use the [editor on GitHub](https://github.com/svw5523/Exploring-Relationships-among-International-Stock-Markets/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+In this project, we explore and analyze the performance of four international stock market indices based on their closing prices and net returns across time. The four selected international market indices are US S&P 500 (GSPC), Euro STOXX (STOXX), Hong Kong Hang Seng index (HSI) and Japan Nikkei 225 (N225). The sample time frame is between Jan 1, 2006 and Apr 30, 2021. The daily closing prices of the four selected international stock market indices, GSPC, STOXX, HSI,
+N225, are extracted from “Yahoo! Finance” by R package “quantmod”.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+The project is mainly divided into three parts. Here the R code accounts for the distribution analysis part. In this part, we explored the appropriate multivariate distribution and copula to four market indices’ net returns. We also performed goodness of fit.
 
-### Markdown
+The distribution analysis is divided into three parts:
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+### Part 1 
+Univariate Distribution Analysis
+- Perform Shapiro-Wilks normality test and conclude that all of the four returns do not follow the normal distribution
+- Apply the Kolmogorov–Smirnov test, with the null hypothesis of sampling from the student t distribution and conclude that these four indices' returns may follow the univariate t distribution
+- We could obtain the fitted MLE “std” t distribution parameters by applying R function “fitdist()”
 
-```markdown
-Syntax highlighted code block
+### Part 2
+Multivariate Distribution Analysis
+- Fit the multivariate t distribution by the profile likelihood method to obtain the fitted "MLE" parameters in multi-dimension, i.e. mean vector μ, scale matrix Λ and tail index ν
+- We repeatedly call the R function “cov.trob()” function to find the optimal value of the tail index and determine the MLE of the other two candidates
 
-# Header 1
-## Header 2
-### Header 3
+### Part 3
+T-copula and Meta-t Distribution
+- Determine Kendall's tau correlation coefficients and transform into the correlation matrix of our net return matrix
+- Transform the net returns into a univariate uniform and apply the R functions “tCopula()” and “fitCopula()” to fit the t-copula to our four indices' return matrix
+- Define the meta-t distribution to our net return matrix given the “std” marginal distribution by applying R functions “mvdc()” and “fitMvdc()
+- According to the fitted meta-t distribution parameters, GSPC and STOXX’s net returns are highly correlated. Besides, HSI and N225’s net returns also have high
+correlation, which may indicate the possibility of “co-movement” in their underlying closing prices.
 
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/svw5523/Exploring-Relationships-among-International-Stock-Markets/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+Conclusion: In distribution analysis, we found that the US and the European markets show strong correlation and interdependence, as well as the Hong Kong and the Japanese markets when analyzing their returns performance. This project shows the possibility of applying cointegration technique when constructing portfolios with these four indices to induce stationary time series process, but more practical researches are needed for further analysis.
