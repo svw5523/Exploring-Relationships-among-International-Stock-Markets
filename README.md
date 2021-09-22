@@ -1,7 +1,7 @@
 # Exploring Relationships among International Stock Markets
 
 In this project, we explore and analyze the performance of four international stock market indices based on their closing prices and net returns across time. The four selected international market indices are US S&P 500 (GSPC), Euro STOXX (STOXX), Hong Kong Hang Seng index (HSI) and Japan Nikkei 225 (N225). The sample time frame is between Jan 1, 2006 and Apr 30, 2021. The daily closing prices of the four selected international stock market indices, GSPC, STOXX, HSI,
-N225, are extracted from “Yahoo! Finance” by R package “quantmod”.
+N225, are extracted from [Yahoo! Finance](https://finance.yahoo.com/) by R package “quantmod”.
 
 The project is mainly divided into three parts. Here the R code accounts for the distribution analysis part. In this part, we explored the appropriate multivariate distribution and copula to four market indices’ net returns. We also performed goodness of fit.
 
